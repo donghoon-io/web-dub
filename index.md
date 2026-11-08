@@ -1,208 +1,50 @@
 ---
-layout: base/bar/bar-sidebar-none
+layout: base/bar/bar
+home: true
 title: "HCI & Design at the University of Washington"
-title_bar: "Design. Use. Build."
-title_bar_secondary: "HCI & Design at the University of Washington"
 ---
-
-<!-- Carousel -->
-<div class="row" id="carousel">
-  <div class="col-md-12">
-    <div id="carousel-main" class="carousel slide" data-ride="carousel" data-interval="10000">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel-main" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-main" data-slide-to="1"></li>
-        <li data-target="#carousel-main" data-slide-to="2"></li>
-<!-- -->
-        <li data-target="#carousel-main" data-slide-to="3"></li>
-<!-- -->
-      </ol>
-
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-<!-- -->
-          <img src="{{ site.baseurl }}/posts/2026/chi2026_slide.png" alt="CHI 2026 Banner">
-          <div class="carousel-caption">
-            <div class="carousel-caption-inner">
-            <h2>DUB at CHI 2026</h2>
-            <p>
-                HCI & Design at the University of Washington<br>has a large and quality presence at CHI 2026.
-            </p>
-            <p>
-              <a href="{{ site.baseurl }}/posts/2026/chi2026papers.html" class="btn btn-default btn-lg">
-                UW Research at CHI 2026
-              </a>
-            </p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-<!-- -->
-          <img src="{{ site.baseurl }}/images/slide_design.jpg" alt="design">
-          <div class="carousel-caption">
-            <div class="carousel-caption-inner">
-            <h2>Design</h2>
-            <p>Applying design to improve the future.</p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="{{ site.baseurl }}/images/slide_use.jpg" alt="use">
-          <div class="carousel-caption">
-            <div class="carousel-caption-inner">
-            <h2>Use</h2>
-            <p>Creating better experiences with technology.</p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="{{ site.baseurl }}/images/slide_build.jpg" alt="build">
-          <div class="carousel-caption">
-            <div class="carousel-caption-inner">
-            <h2>Build</h2>
-            <p>Prototyping and developing new technologies.</p>
-            </div>
-          </div>
-        </div>       
-      </div>
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-main" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+<section class="hero site-width" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <h1 id="hero-title">Design.<br>Use. <span>Build.</span></h1>
+    <p class="hero-description">A community for human–computer interaction<br class="desktop-break"> and design at the University of Washington.</p>
+    <div class="hero-actions"><a class="button button-purple" href="{{ site.baseurl }}/aboutdub.html">About DUB <span aria-hidden="true">↗</span></a><a class="text-link" href="{{ site.baseurl }}/seminar.html">View seminars <span aria-hidden="true">→</span></a></div>
+  </div>
+  {% include hero-slideshow.html %}
+</section>
+<section class="happening-section site-width" aria-labelledby="happening-title">
+  <div class="section-heading"><div><h2 id="happening-title">News and events</h2></div><a class="text-link" href="{{ site.baseurl }}/seminar.html">Explore our seminars <span aria-hidden="true">↗</span></a></div>
+  <div class="happening-grid">
+    <a class="research-feature" href="{{ site.baseurl }}/posts/2026/chi2026papers.html">
+      <div class="feature-image"><img src="{{ site.baseurl }}/posts/2026/chi2026_slide.png" alt="Colorful geometric artwork with a Barcelona skyline for CHI 2026" loading="lazy"></div>
+      <div class="feature-copy"><div><h3>DUB at CHI 2026</h3><p>Browse papers from University of Washington researchers at CHI 2026.</p></div><span class="circle-arrow" aria-hidden="true">↗</span></div>
+    </a>
+    <div class="seminar-feature">
+      <div class="seminar-feature-heading"><h3>Upcoming events</h3></div>
+      {% assign upcoming = site.seminars | seminar_upcoming: site.time | sort: 'date' %}
+      {% for item_seminar in upcoming limit: 2 %}
+      <a class="event-item" href="{{ site.baseurl }}{% if item_seminar.no_seminar %}/seminar.html{% else %}{{ item_seminar.url }}{% endif %}">
+        <div class="event-date"><span>{{ item_seminar.date | date: '%b' }}</span><strong>{{ item_seminar.date | date: '%d' }}</strong></div>
+        <div class="event-copy"><span class="event-type">{% if item_seminar.no_seminar %}Community calendar{% else %}DUB seminar{% endif %}</span><h3>{% if item_seminar.no_seminar and item_seminar.tbd_title %}{{ item_seminar.no_seminar_text }}{% elsif item_seminar.tbd_title %}{% if item_seminar.speakers.size > 0 %}{% for speaker in item_seminar.speakers %}{% for name in speaker.name offset: 1 %}{{ name }} {% endfor %}{{ speaker.name[0] }}{% unless forloop.last %}, {% endunless %}{% endfor %}{% else %}DUB Seminar{% endif %}{% else %}{{ item_seminar.title }}{% endif %}</h3><p>{% unless item_seminar.no_seminar %}{{ item_seminar.time }}{% unless item_seminar.tbd_location %}<br>{{ item_seminar.location }}{% endunless %}{% endunless %}</p></div>
       </a>
-      <a class="right carousel-control" href="#carousel-main" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+      {% else %}
+      <div class="event-empty"><h3>No upcoming seminars scheduled</h3><p>Join the mailing list for the next seminar announcement, or explore past talks.</p></div>
+      {% endfor %}
+      <a class="text-link" href="{{ site.baseurl }}/seminar.html">View the full schedule <span aria-hidden="true">→</span></a>
     </div>
   </div>
-</div>
-<!-- Carousel End -->
-
-<!-- Footer -->
-<div class="row" id="footer">
-  <div class="col-md-4 footer-panel">
-    <section class="footer-content">
-      <div markdown="block">
-## What is DUB?
-
-DUB is a grassroots alliance of faculty, students, researchers, and
-industry partners interested in Human Computer Interaction & Design at the 
-University of Washington. 
-
-Our mission is to bring together an interdisciplinary group of people to share ideas, 
-collaborate on research, and advance teaching related to the interaction between design, people, and technology.
-
-</div>
-    </section>
+</section>
+<section class="community-section" aria-labelledby="community-title">
+  <div class="site-width community-grid">
+    <div class="community-image"><img src="{{ site.baseurl }}/images/slide_design.jpg" alt="DUB community members sharing ideas around a table at a design workshop" loading="lazy"></div>
+    <div class="community-copy"><h2 id="community-title">About DUB</h2><p>We’re a grassroots community of faculty, students, researchers, and industry partners exploring how technology can better serve people.</p><p>Across the University of Washington and beyond, we come together to share ideas, advance research, and learn from one another.</p><a class="text-link" href="{{ site.baseurl }}/aboutdub.html">More about DUB <span aria-hidden="true">↗</span></a></div>
   </div>
-  <div class="col-md-4 footer-panel">
-    <section class="footer-content">
-      <h2>Upcoming Events</h2>
-      <div class="calendar-feed">
-        {% assign upcoming = site.seminars | seminar_upcoming: site.time %}
-        {% for item_seminar in upcoming limit: 2 %}
-          <div class="row upcomingseminar">
-            <div class="col-xs-4">
-              <strong>{{ item_seminar.date | date: "%b %-d" | upcase }}</strong>
-            </div>
-            <div class="col-xs-8 text-right">
-              {% unless item_seminar.no_seminar %}
-                {{ item_seminar.time }}
-              {% endunless %}
-            </div>
-
-            <div class="col-xs-12 text-right upcomingseminar">
-              {% unless item_seminar.no_seminar %}
-                {% unless item_seminar.tbd_location %}
-                  {% include seminarlocation.md location=item_seminar.location %}
-                {% endunless %}
-              {% endunless %}
-            </div>
-
-            <div class="col-xs-12">
-              {% unless item_seminar.no_seminar %}
-                {% unless item_seminar.tbd_title %}
-                  <a href="{{ site.baseurl }}{{ item_seminar.url }}">{{ item_seminar.title }}</a>
-                {% else %}
-                  DUB Seminar
-                {% endunless %}
-              {% else %}
-                {% unless item_seminar.tbd_title %}
-                  <a href="{{ site.baseurl }}{{ item_seminar.url }}">{{ item_seminar.title }}</a>
-                  <div class="text-muted no-seminar">
-                    {{ item_seminar.no_seminar_text }}
-                  </div>
-                {% else %}
-                  <div class="text-muted no-seminar">
-                    {{ item_seminar.no_seminar_text }}
-                  </div>
-                {% endunless %}
-              {% endunless %}
-            </div>
-
-            <div class="col-xs-12">
-              {% assign speaker_names = '' | split: ' ' %}
-              {% for item_speaker in item_seminar.speakers %}
-                {% assign item_full_name = '' %}
-                {% for item_name in item_speaker.name offset: 1 %}
-                  {% assign item_full_name = item_full_name | append: ' ' | append: item_name %}
-                  {% if forloop.last %}
-                    {% assign item_full_name = item_full_name | append: ' ' | append: item_speaker.name[0] %}
-                  {% endif %}
-                {% endfor %}
-                {% assign speaker_names = speaker_names | push: item_full_name %}
-              {% endfor %}
-              {% assign speaker_names = speaker_names | join: ', ' %}
-              {{ speaker_names}}
-            </div>
-          </div>
-
-          <hr />
-        {% endfor %}
-      </div>
-      <div class="row icon-bottom">
-        <div class="col-xs-12 calendar-button">
-        <a href="{{ site.baseurl }}/seminar.html" type="button" class="btn btn-default btn-block">View Full Calendar</a>
-        </div>
-      </div>
-    </section>
+</section>
+<section class="pathways-section site-width" aria-labelledby="pathways-title">
+  <div class="section-heading"><div><h2 id="pathways-title">Programs and participation</h2></div></div>
+  <div class="pathways-grid">
+    <a class="pathway" href="{{ site.baseurl }}/seminar.html"><h3>Seminars</h3><p>Attend talks by researchers and practitioners in human–computer interaction and design.</p><span class="text-link">Explore the series <span aria-hidden="true">↗</span></span></a>
+    <a class="pathway" href="{{ site.baseurl }}/reu.html"><h3>Undergraduate research</h3><p>Find undergraduate research opportunities in human–computer interaction and design.</p><span class="text-link">Discover the REU program <span aria-hidden="true">↗</span></span></a>
+    <a class="pathway" href="{{ site.baseurl }}/gettinginvolved.html#tab_mailing_lists_and_slack"><h3>Mailing lists and Slack</h3><p>Connect with the community through our mailing lists and Slack conversations.</p><span class="text-link">Get connected <span aria-hidden="true">↗</span></span></a>
   </div>
-  <div class="col-md-4 footer-panel">
-    <section class="footer-content">
-      <h2>Connect with DUB</h2>
-      <p class="connect-text">Join one of the world's most vibrant communities for research and education addressing all aspects of Human Computer Interaction & Design.</p>
-      <div class="icon-bottom">
-        <a href="{{ site.baseurl }}/gettinginvolved.html#tab_mailing_lists_and_slack">
-          <p>
-            <img src="{{ site.baseurl }}/images/connect_email.png" class="connecticon" alt="e-mail">
-            <span class="icon-link-text"><strong>Join</strong> the mailing lists</span>
-          </p>
-        </a>
-        <!--
-        <a href="http://twitter.com/#!/uwdub">
-          <p>
-            <img src="{{ site.baseurl }}/images/connect_twitter.png" class="connecticon" alt="twitter">
-            <span class="icon-link-text"><strong>Tweet</strong> @uwdub</span>
-          </p>
-        </a>
-        -->
-        <a href="http://vimeo.com/designusebuild">
-          <p>
-            <img src="{{ site.baseurl }}/images/connect_vimeo.png" class="connecticon" alt="vimeo">
-            <span class="icon-link-text"><strong>Follow</strong> us on Vimeo</span>
-          </p>
-        </a>
-        <a href="https://medium.com/hci-design-at-uw">
-          <p>
-            <img src="{{ site.baseurl }}/images/connect_medium.png" class="connecticon" alt="medium">
-            <span class="icon-link-text"><strong>Read</strong> more on Medium</span>
-          </p>
-        </a>
-      </div>
-    </section>
-  </div>
-</div>
-<!-- Footer End -->
+</section>
+<section class="join-section site-width"><div><h2>Connect with DUB</h2></div><a class="button button-purple" href="{{ site.baseurl }}/gettinginvolved.html">Get involved <span aria-hidden="true">↗</span></a></section>
